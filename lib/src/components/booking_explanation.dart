@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 
 class BookingExplanation extends StatelessWidget {
   const BookingExplanation(
-      {Key? key,
+      {super.key,
       required this.color,
       required this.text,
-      this.explanationIconSize})
-      : super(key: key);
+      this.explanationIconSize});
 
   final Color color;
   final String text;

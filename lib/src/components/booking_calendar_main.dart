@@ -179,7 +179,9 @@ class _BookingCalendarMainState extends State<BookingCalendarMain> {
                       },
                       enabledDayPredicate: (day) {
                         if (widget.disabledDays == null &&
-                            widget.disabledDates == null) return true;
+                            widget.disabledDates == null) {
+                          return true;
+                        }
 
                         bool isEnabled = true;
                         if (widget.disabledDates != null) {

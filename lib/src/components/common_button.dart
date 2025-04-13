@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class CommonButton extends StatelessWidget {
   const CommonButton({
-    Key? key,
+    super.key,
     required this.text,
     required this.onTap,
     this.isActive = true,
@@ -11,7 +11,7 @@ class CommonButton extends StatelessWidget {
     this.width,
     this.buttonActiveColor,
     this.buttonInActiveColor,
-  }) : super(key: key);
+  });
 
   final String text;
   final VoidCallback onTap;

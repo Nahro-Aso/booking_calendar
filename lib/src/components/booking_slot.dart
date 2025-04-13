@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class BookingSlot extends StatelessWidget {
   const BookingSlot({
-    Key? key,
+    super.key,
     required this.child,
     required this.isBooked,
     required this.onTap,
@@ -14,7 +14,7 @@ class BookingSlot extends StatelessWidget {
     this.availableSlotColor,
     this.pauseSlotColor,
     this.hideBreakSlot,
-  }) : super(key: key);
+  });
 
   final Widget child;
   final bool isBooked;

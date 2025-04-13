@@ -8,7 +8,7 @@ import 'booking_controller.dart';
 
 class BookingCalendar extends StatelessWidget {
   const BookingCalendar(
-      {Key? key,
+      {super.key,
       required this.bookingService,
       required this.getBookingStream,
       required this.uploadBooking,
@@ -41,8 +41,7 @@ class BookingCalendar extends StatelessWidget {
       this.startingDayOfWeek = StartingDayOfWeek.monday,
       this.disabledDays,
       this.disabledDates,
-      this.lastDay})
-      : super(key: key);
+      this.lastDay});
 
   ///for the Calendar picker we use: [TableCalendar]
   ///credit: https://pub.dev/packages/table_calendar

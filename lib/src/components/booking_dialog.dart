@@ -2,7 +2,7 @@ import 'package:booking_calendar/src/components/common_card.dart';
 import 'package:flutter/material.dart';
 
 class BookingDialog extends StatelessWidget {
-  const BookingDialog({Key? key}) : super(key: key);
+  const BookingDialog({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 
 class CommonCard extends StatelessWidget {
   const CommonCard(
-      {Key? key, required this.child, this.padding, this.margin, this.color, this.borderRadius, this.boxShadow})
-      : super(key: key);
+      {super.key, required this.child, this.padding, this.margin, this.color, this.borderRadius, this.boxShadow});
 
   final Widget child;
   final EdgeInsets? padding;
