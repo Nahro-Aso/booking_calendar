@@ -16,7 +16,7 @@ import 'common_card.dart';
 
 class BookingCalendarMain extends StatefulWidget {
   const BookingCalendarMain({
-    Key? key,
+    super.key,
     required this.getBookingStream,
     required this.convertStreamResultToDateTimeRanges,
     required this.uploadBooking,
@@ -48,7 +48,7 @@ class BookingCalendarMain extends StatefulWidget {
     this.disabledDays,
     this.disabledDates,
     this.lastDay,
-  }) : super(key: key);
+  });
 
   final Stream<dynamic>? Function(
       {required DateTime start, required DateTime end}) getBookingStream;
