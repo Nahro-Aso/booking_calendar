@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
 
 class CommonCard extends StatelessWidget {
-  const CommonCard(
-      {super.key, required this.child, this.padding, this.margin, this.color, this.borderRadius, this.boxShadow});
+  const CommonCard({
+    super.key,
+    required this.child,
+    this.padding,
+    this.margin,
+    this.color,
+    this.borderRadius,
+    this.boxShadow,
+    this.border,
+  });
 
   final Widget child;
   final EdgeInsets? padding;
@@ -10,20 +18,24 @@ class CommonCard extends StatelessWidget {
   final BorderRadius? borderRadius;
   final BoxShadow? boxShadow;
   final Color? color;
+  final Border? border;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-        margin: margin,
-        padding: padding ?? const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-        decoration: BoxDecoration(
-          color: color ?? Colors.white,
-          borderRadius: borderRadius ?? const BorderRadius.all(Radius.circular(16)),
-          boxShadow: [
-            boxShadow ??
-                BoxShadow(blurRadius: 10.0, offset: const Offset(0, 5), color: const Color(0xff666666).withOpacity(0.1))
-          ],
-        ),
-        child: child);
+      margin: margin,
+      padding: padding ?? const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: color ?? Colors.white,
+        borderRadius: borderRadius ?? BorderRadius.zero,
+        border: border ??
+            Border.all(
+              color: Colors.black.withOpacity(0.08),
+              width: 0.25,
+            ),
+        // Remove shadows for clean minimalist design
+      ),
+      child: child,
+    );
   }
 }

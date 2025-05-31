@@ -29,15 +29,38 @@ class BookingSlot extends StatelessWidget {
 
   Color getSlotColor() {
     if (isPauseTime) {
-      return pauseSlotColor ?? Colors.grey;
+      return pauseSlotColor ?? Colors.black.withOpacity(0.05);
     }
 
     if (isBooked) {
-      return bookedSlotColor ?? Colors.redAccent;
+      return bookedSlotColor ?? Colors.red.withOpacity(0.05);
     } else {
       return isSelected
-          ? selectedSlotColor ?? Colors.orangeAccent
-          : availableSlotColor ?? Colors.greenAccent;
+          ? selectedSlotColor ?? Colors.black
+          : availableSlotColor ?? Colors.green.withOpacity(0.05);
+    }
+  }
+
+  Border getSlotBorder() {
+    if (isPauseTime) {
+      return Border.all(
+        color: Colors.black.withOpacity(0.1),
+        width: 0.25,
+      );
+    }
+
+    if (isBooked) {
+      return Border.all(
+        color: Colors.red.withOpacity(0.3),
+        width: 0.25,
+      );
+    } else {
+      return isSelected
+          ? Border.all(color: Colors.black, width: 0.25)
+          : Border.all(
+              color: Colors.green.withOpacity(0.3),
+              width: 0.25,
+            );
     }
   }
 
@@ -45,14 +68,30 @@ class BookingSlot extends StatelessWidget {
   Widget build(BuildContext context) {
     return (hideBreakSlot != null && hideBreakSlot == true && isPauseTime)
         ? const SizedBox()
-        : GestureDetector(
-            onTap: (!isBooked && !isPauseTime) ? onTap : null,
-            child: CommonCard(
-                margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+        : Material(
+            color: Colors.transparent,
+            child: InkWell(
+              onTap: (!isBooked && !isPauseTime) ? onTap : null,
+              child: Container(
+                margin: const EdgeInsets.all(4),
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                color: getSlotColor(),
-                child: child),
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+                decoration: BoxDecoration(
+                  color: getSlotColor(),
+                  borderRadius: BorderRadius.zero,
+                  border: getSlotBorder(),
+                ),
+                child: DefaultTextStyle(
+                  style: TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w500,
+                    color: isSelected ? Colors.white : Colors.black,
+                    letterSpacing: 0.3,
+                  ),
+                  child: child,
+                ),
+              ),
+            ),
           );
   }
 }

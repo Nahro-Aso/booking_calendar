@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 
 class BookingExplanation extends StatelessWidget {
-  const BookingExplanation(
-      {super.key,
-      required this.color,
-      required this.text,
-      this.explanationIconSize});
+  const BookingExplanation({
+    super.key,
+    required this.color,
+    required this.text,
+    this.explanationIconSize,
+  });
 
   final Color color;
   final String text;
@@ -13,20 +14,42 @@ class BookingExplanation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final themeData = Theme.of(context);
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Container(
-          height: explanationIconSize ?? 16,
-          width: explanationIconSize ?? 16,
-          decoration: BoxDecoration(color: color, shape: BoxShape.circle),
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      decoration: BoxDecoration(
+        color: Colors.black.withOpacity(0.02),
+        border: Border.all(
+          color: Colors.black.withOpacity(0.05),
+          width: 0.25,
         ),
-        const SizedBox(width: 4),
-        Text(text,
-            style: themeData.textTheme.bodyLarge
-                ?.copyWith(fontWeight: FontWeight.bold)),
-      ],
+        borderRadius: BorderRadius.zero,
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            height: explanationIconSize ?? 12,
+            width: explanationIconSize ?? 12,
+            decoration: BoxDecoration(
+              color: color,
+              border: Border.all(
+                color: Colors.black.withOpacity(0.1),
+                width: 0.25,
+              ),
+            ),
+          ),
+          const SizedBox(width: 8),
+          Text(
+            text.toUpperCase(),
+            style: const TextStyle(
+              fontSize: 11,
+              fontWeight: FontWeight.w600,
+              color: Colors.black,
+              letterSpacing: 0.5,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

@@ -205,8 +205,93 @@ class _BookingCalendarMainState extends State<BookingCalendarMain> {
                           DateTime.now().add(const Duration(days: 1000)),
                       focusedDay: _focusedDay,
                       calendarFormat: _calendarFormat,
-                      calendarStyle:
-                          const CalendarStyle(isTodayHighlighted: true),
+                      calendarStyle: CalendarStyle(
+                        isTodayHighlighted: true,
+                        todayDecoration: BoxDecoration(
+                          color: Colors.black.withOpacity(0.1),
+                          border: Border.all(color: Colors.black, width: 0.25),
+                        ),
+                        selectedDecoration: const BoxDecoration(
+                          color: Colors.black,
+                          border: Border.fromBorderSide(
+                            BorderSide(color: Colors.black, width: 0.25),
+                          ),
+                        ),
+                        weekendTextStyle: TextStyle(
+                          color: Colors.red.withOpacity(0.8),
+                          fontWeight: FontWeight.w500,
+                        ),
+                        defaultTextStyle: const TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.w500,
+                        ),
+                        outsideTextStyle: TextStyle(
+                          color: Colors.black.withOpacity(0.3),
+                          fontWeight: FontWeight.w400,
+                        ),
+                        disabledTextStyle: TextStyle(
+                          color: Colors.black.withOpacity(0.2),
+                          fontWeight: FontWeight.w400,
+                        ),
+                        holidayTextStyle: TextStyle(
+                          color: Colors.red.withOpacity(0.6),
+                          fontWeight: FontWeight.w500,
+                        ),
+                        markersMaxCount: 1,
+                        markerDecoration: BoxDecoration(
+                          color: Colors.black.withOpacity(0.6),
+                        ),
+                        tablePadding: const EdgeInsets.all(8),
+                        cellMargin: const EdgeInsets.all(2),
+                      ),
+                      headerStyle: HeaderStyle(
+                        formatButtonVisible: true,
+                        titleCentered: true,
+                        formatButtonShowsNext: false,
+                        formatButtonDecoration: BoxDecoration(
+                          color: Colors.black.withOpacity(0.05),
+                          border: Border.all(
+                            color: Colors.black.withOpacity(0.1),
+                            width: 0.25,
+                          ),
+                        ),
+                        formatButtonTextStyle: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600,
+                          letterSpacing: 0.3,
+                        ),
+                        leftChevronIcon: Icon(
+                          Icons.chevron_left,
+                          color: Colors.black.withOpacity(0.7),
+                          size: 20,
+                        ),
+                        rightChevronIcon: Icon(
+                          Icons.chevron_right,
+                          color: Colors.black.withOpacity(0.7),
+                          size: 20,
+                        ),
+                        titleTextStyle: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.black,
+                          letterSpacing: 0.3,
+                        ),
+                      ),
+                      daysOfWeekStyle: DaysOfWeekStyle(
+                        weekdayStyle: TextStyle(
+                          color: Colors.black.withOpacity(0.7),
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600,
+                          letterSpacing: 0.5,
+                        ),
+                        weekendStyle: TextStyle(
+                          color: Colors.red.withOpacity(0.7),
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600,
+                          letterSpacing: 0.5,
+                        ),
+                      ),
                       selectedDayPredicate: (day) {
                         return isSameDay(_selectedDay, day);
                       },
@@ -235,25 +320,26 @@ class _BookingCalendarMainState extends State<BookingCalendarMain> {
                   widget.bookingExplanation ??
                       Wrap(
                         alignment: WrapAlignment.spaceAround,
-                        spacing: 8.0,
-                        runSpacing: 8.0,
+                        spacing: 12.0,
+                        runSpacing: 12.0,
                         direction: Axis.horizontal,
                         children: [
                           BookingExplanation(
                               color: widget.availableSlotColor ??
-                                  Colors.greenAccent,
+                                  Colors.green.withOpacity(0.05),
                               text: widget.availableSlotText ?? "Available"),
                           BookingExplanation(
-                              color: widget.selectedSlotColor ??
-                                  Colors.orangeAccent,
+                              color: widget.selectedSlotColor ?? Colors.black,
                               text: widget.selectedSlotText ?? "Selected"),
                           BookingExplanation(
-                              color: widget.bookedSlotColor ?? Colors.redAccent,
+                              color: widget.bookedSlotColor ??
+                                  Colors.red.withOpacity(0.05),
                               text: widget.bookedSlotText ?? "Booked"),
                           if (widget.hideBreakTime != null &&
                               widget.hideBreakTime == false)
                             BookingExplanation(
-                                color: widget.pauseSlotColor ?? Colors.grey,
+                                color: widget.pauseSlotColor ??
+                                    Colors.black.withOpacity(0.05),
                                 text: widget.pauseSlotText ?? "Break"),
                         ],
                       ),
@@ -336,10 +422,10 @@ class _BookingCalendarMainState extends State<BookingCalendarMain> {
                     },
                   ),
                   const SizedBox(
-                    height: 16,
+                    height: 24,
                   ),
                   CommonButton(
-                    text: widget.bookingButtonText ?? 'BOOK',
+                    text: widget.bookingButtonText ?? 'BOOK NOW',
                     onTap: () async {
                       controller.toggleUploading();
                       await widget.uploadBooking(
@@ -349,7 +435,8 @@ class _BookingCalendarMainState extends State<BookingCalendarMain> {
                       controller.resetSelectedSlot();
                     },
                     isDisabled: controller.selectedSlot == -1,
-                    buttonActiveColor: widget.bookingButtonColor,
+                    buttonActiveColor:
+                        widget.bookingButtonColor ?? Colors.black,
                   ),
                 ],
               ),

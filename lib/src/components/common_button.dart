@@ -24,11 +24,11 @@ class CommonButton extends StatelessWidget {
 
   Color _getButtonColor() {
     if (isActive == true && isDisabled == false) {
-      return buttonActiveColor ?? Colors.teal;
+      return buttonActiveColor ?? Colors.black;
     } else if (isActive == false && isDisabled == false) {
       return Colors.white;
     } else {
-      return buttonInActiveColor ?? Colors.teal.shade100;
+      return buttonInActiveColor ?? Colors.black.withOpacity(0.3);
     }
   }
 
@@ -36,30 +36,50 @@ class CommonButton extends StatelessWidget {
     if (isActive == true && isDisabled == false) {
       return Colors.white;
     } else if (isActive == false && isDisabled == false) {
-      return buttonActiveColor ?? Colors.teal;
+      return buttonActiveColor ?? Colors.black;
     } else {
       return Colors.white;
     }
   }
 
+  Border? _getBorder() {
+    if (isActive == false && isDisabled == false) {
+      return Border.all(
+        color: buttonActiveColor ?? Colors.black,
+        width: 0.25,
+      );
+    }
+    return Border.all(
+      color: Colors.black.withOpacity(0.1),
+      width: 0.25,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    final themeData = Theme.of(context).textTheme;
-
-    return InkWell(
-      onTap: (isDisabled == null || isDisabled == false) ? onTap : null,
-      child: Container(
-        width: width ?? double.infinity,
-        padding: const EdgeInsets.symmetric(vertical: 12),
-        decoration: BoxDecoration(
-          color: _getButtonColor(),
-          borderRadius: const BorderRadius.all(Radius.circular(24)),
-          border: (isActive == false && isDisabled == false) ? Border.all(color: Colors.teal, width: 2) : null,
-        ),
-        child: Text(
-          text,
-          style: buttonStyle ?? themeData.labelLarge!.copyWith(color: _getTextColor()),
-          textAlign: TextAlign.center,
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: (isDisabled == null || isDisabled == false) ? onTap : null,
+        child: Container(
+          width: width ?? double.infinity,
+          padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
+          decoration: BoxDecoration(
+            color: _getButtonColor(),
+            borderRadius: BorderRadius.zero,
+            border: _getBorder(),
+          ),
+          child: Text(
+            text.toUpperCase(),
+            style: buttonStyle ??
+                TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                  color: _getTextColor(),
+                  letterSpacing: 0.5,
+                ),
+            textAlign: TextAlign.center,
+          ),
         ),
       ),
     );
